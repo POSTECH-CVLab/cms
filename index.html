@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contrastive Mean-Shift Learning for Generalized Category Discovery</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/project.css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/iconize.css" />
+    <script src="js/google-code-prettify/prettify.js"></script> -->
+
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2>Contrastive Mean-Shift Learning for Generalized Category Discovery</h2>
+          <h4 style="color:#5a6268;">CVPR 2024 </h4>
+          <hr>
+          <h6>
+            <a href="http://sua-choi.github.io" target="_blank">Sua Choi</a>,
+            <a href="http://dahyun-kang.github.io" target="_blank">Dahyun Kang</a>,
+            <a href="https://cvlab.postech.ac.kr/~mcho/" target="_blank">Minsu Cho</a>
+          </h6>
+          <p>
+            Pohang University of Science and Technology (POSTECH)
+          </p>
+
+          <div class="row justify-content-center">
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="http://arxiv.org/abs/2404.09451" role="button"
+                  target="_blank">
+                  <i class="fa fa-file"></i> Paper</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/sua-choi/CMS"
+                  role="button" target="_blank">
+                  <i class="fa fa-github-alt"></i> Code </a> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <br>
+        <h2>Abstract</h2>
+        <!-- <hr style="margin-top:0px"> -->
+
+        <p class="text-left">
+          We address the problem of generalized category discovery (GCD) that aims to partition a partially labeled collection of images; 
+          only a small part of the collection is labeled and the total number of target classes is unknown. To address this generalized 
+          image clustering problem, we revisit the mean-shift algorithm, i.e., a classic, powerful technique for mode seeking, and 
+          incorporate it into a contrastive learning framework. The proposed method, dubbed Contrastive Mean-Shift (CMS) learning, 
+          trains an image encoder to produce representations with better clustering properties by an iterative process of mean shift and 
+          contrastive update. Experiments demonstrate that our method, both in settings with and without the total number of clusters 
+          being known, achieves state-of-the-art performance on six public GCD benchmarks without bells and whistles.
+        </p>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>Methods</h2>
+        <!-- <hr style="margin-top:0px"> -->
+      </div>
+        <br>
+        <div class="col-12">
+          <p class="text-left">
+          <img src="images/overview.png" style="width:100%; margin-top:10px; margin-bottom:10px;"">
+          <h4>Contrastive Mean-Shift learning</h4>
+          <!-- We revisit the mean-shift and introduce contrastive mean-shift (CMS) learning for generalized category discovery. -->
+          Given a collection of images, each initial image embedding $\boldsymbol{v}_i$ from an image encoder takes a single step of 
+          mean shift to be $\boldsymbol{z}_i$ by aggregating its $k$ nearest neighbors with a weight kernel $\varphi(\cdot)$. The 
+          encoder network is then updated by contrastive learning with the mean-shifted embeddings, which draws a mean-shifted embedding 
+          of image $x_{i}$ and that of its augmented image $x_{i}^{+}$ closer and pushes those of distinct images apart from each other.
+          <br>
+          <br>
+          <h4>Iterative Mean-Shift at inference</h4>
+          To improve the final clustering property of the embeddings, we perform multi-step mean shift on the embeddings before
+          agglomerative clustering. Starting from the initial embeddings from the learned encoder, we update them to $t$-step 
+          mean-shifted embeddings until the clustering accuracy on the labeled data converges. The final cluster assignment is obtained 
+          by performing agglomerative clustering on the multi-step mean-shifted embeddings. 
+          <br>          
+        </p>
+        <br>
+        
+      </div>
+    </div>
+</section>
+<br>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>Experiments</h2>
+      </div>
+
+      <div class="col-12">
+        <p class="text-left">
+          <h4>Evaluation on GCD</h4>
+          <img src="images/results.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
+          <br> 
+          Comparison with the state of the arts on GCD using <i>DINO-ViT-B/16</i>, evaluated with or without the ground-truth 
+          class number K for clustering. 
+
+          <img src="images/results2.png" style="width:100%; margin-top:20px; margin-bottom:10px;">
+          Comparison with the state of the arts on GCD using <i>CLIP-ViT-B/16</i>, evaluated with or without the ground-truth 
+          class number K for clustering.
+          <br> 
+          <br> 
+          <h4>Ablation study</h4>
+          <img src="images/ablations.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
+          Effectiveness of each component of our method. SSK denotes semi-supervised k-means clustering and IMS denotes 
+          iterative mean-shift.
+          <br> 
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>Qualitative results</h2>
+      </div>
+
+      <div class="col-12">
+        <p class="text-left">
+        <img src="images/qualitative.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
+        kNN retrieved images of the initial embedding $\boldsymbol{v}$ and mean-shifted embedding $\boldsymbol{z}$ on CUB-200-2011. 
+        Green denotes the correct class and red an incorrect class.
+      </div>
+
+      <div class="col-12">
+        <p class="text-left">
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+  @inproceedings{choi2024contrastive,
+    title={Contrastive Mean-Shift Learning for Generalized Category Discovery},
+    author={Choi, Sua and Kang, Dahyun and Cho, Minsu},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    year={2024}
+  }
+</code>
+              </pre>
+      <hr>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center" style="margin-bottom:10px">
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+</footer>
+
+</body>
+
+</html>
