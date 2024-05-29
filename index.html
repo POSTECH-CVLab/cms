@@ -95,14 +95,44 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
+        <h2>Preliminaries</h2>
+        <!-- <hr style="margin-top:0px"> -->
+      </div>
+        <br>
+        <div class="col-12">
+          <p class="text-left">
+            <center>
+              <img src="images/preliminary.png" style="width:75%; margin-bottom:20px;">
+            </center>
+          <!-- <h4>Mean-Shift</h4> -->
+          <!-- We revisit the mean-shift and introduce contrastive mean-shift (CMS) learning for generalized category discovery. -->
+          Mean-shift is a classic, powerful technique for mode seeking and clustering analysis. It assigns each data point a 
+          corresponding mode through iterative shifts by kernel-weighted aggregation of neighboring points. The set of data 
+          points that converge to the same mode defines the basin of attraction of that mode, and this naturally relates to 
+          clustering: the points in the same basin of attraction are associated with the same cluster.
+          <br>       
+        </p>
+        <br>
+        
+      </div>
+    </div>
+</section>
+<br>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
         <h2>Methods</h2>
         <!-- <hr style="margin-top:0px"> -->
       </div>
         <br>
         <div class="col-12">
           <p class="text-left">
-          <img src="images/overview.png" style="width:100%; margin-top:10px; margin-bottom:10px;"">
-          <h4>Contrastive Mean-Shift learning</h4>
+            <h4>Learning framework: Contrastive Mean-Shift learning (CMS)</h4>
+            <center>
+              <img src="images/overview.png" style="width:100%; margin-top:10px; margin-bottom:20px;">
+            </center>
           <!-- We revisit the mean-shift and introduce contrastive mean-shift (CMS) learning for generalized category discovery. -->
           Given a collection of images, each initial image embedding $\boldsymbol{v}_i$ from an image encoder takes a single step of 
           mean shift to be $\boldsymbol{z}_i$ by aggregating its $k$ nearest neighbors with a weight kernel $\varphi(\cdot)$. The 
@@ -110,7 +140,22 @@
           of image $x_{i}$ and that of its augmented image $x_{i}^{+}$ closer and pushes those of distinct images apart from each other.
           <br>
           <br>
-          <h4>Iterative Mean-Shift at inference</h4>
+          <br>
+          <h4>Validation: Estimating the number of clusters</h4>
+          <center>
+            <img src="images/validation.png" style="width:80%; margin-top:10px; margin-bottom:20px;">
+          </center>
+          During training, we estimate the number of clusters K at the end of every epoch for a fairer and efficient validation. We apply 
+          agglomerative clustering on the validation set to obtain clustering results for different number of clusters. Among them, the 
+          highest clustering accuracy on the labeled images is recorded as the validation performance, and the corresponding number of 
+          clusters is determined as the estimated number of clusters.
+          <br>
+          <br>
+          <br>
+          <h4>Inference: Iterative Mean-Shift (IMS)</h4>
+          <center>
+            <img src="images/inference.png" style="width:80%; margin-top:10px; margin-bottom:20px;">
+          </center>
           To improve the final clustering property of the embeddings, we perform multi-step mean shift on the embeddings before
           agglomerative clustering. Starting from the initial embeddings from the learned encoder, we update them to $t$-step 
           mean-shifted embeddings until the clustering accuracy on the labeled data converges. The final cluster assignment is obtained 
