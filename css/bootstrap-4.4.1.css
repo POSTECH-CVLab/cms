@@ -5258,17 +5258,17 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbotron {
-  /* padding: 1rem 1rem; */
+  padding: 4rem 2rem 4rem;
   margin-bottom: 1rem;
   background-color: #ebf0f1; /*#e9ecef;*/ 
   border-radius: 0.3rem;
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .jumbotron {
     padding: 4rem 2rem;
   }
-}
+} */
 
 .jumbotron-fluid {
   padding-right: 0;

@@ -91,18 +91,30 @@
 </section>
 <br>
 
+
+<style>
+  .image {
+      width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+      .image {
+          width: 80%;
+      }
+  }
+</style>
 <section>
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2>Preliminaries</h2>
+        <h2>Preliminary</h2>
         <!-- <hr style="margin-top:0px"> -->
       </div>
         <br>
         <div class="col-12">
           <p class="text-left">
             <center>
-              <img src="images/preliminary.png" style="width:75%; margin-bottom:20px;">
+              <img src="images/preliminary.png" class="image" style="margin-top:10px; margin-bottom:20px;">
             </center>
           <!-- <h4>Mean-Shift</h4> -->
           <!-- We revisit the mean-shift and introduce contrastive mean-shift (CMS) learning for generalized category discovery. -->
@@ -143,7 +155,7 @@
           <br>
           <h4>Validation: Estimating the number of clusters</h4>
           <center>
-            <img src="images/validation.png" style="width:80%; margin-top:10px; margin-bottom:20px;">
+            <img src="images/validation.png" class="image" style="margin-top:10px; margin-bottom:20px;">
           </center>
           During training, we estimate the number of clusters K at the end of every epoch for a fairer and efficient validation. We apply 
           agglomerative clustering on the validation set to obtain clustering results for different number of clusters. Among them, the 
@@ -154,7 +166,7 @@
           <br>
           <h4>Inference: Iterative Mean-Shift (IMS)</h4>
           <center>
-            <img src="images/inference.png" style="width:80%; margin-top:10px; margin-bottom:20px;">
+            <img src="images/inference.png" class="image" style="margin-top:10px; margin-bottom:20px;">
           </center>
           To improve the final clustering property of the embeddings, we perform multi-step mean shift on the embeddings before
           agglomerative clustering. Starting from the initial embeddings from the learned encoder, we update them to $t$-step 
